@@ -1,5 +1,5 @@
 window.onload = function () {
-    const country = document.querySelector('select[name="iso2"]');
+    const country = document.querySelector('select[name="country"]');
     const city = document.querySelector('select[name="city"]');
     city.disabled = true;
 
@@ -12,8 +12,8 @@ window.onload = function () {
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({country: countryN})
         })
-            .then(response => response.json())
-            .then(data => {
+        .then(response => response.json())
+        .then(data => {
             city.innerHTML = '';
             if (data.data && data.data.length > 0) {
                 data.data.forEach(cityName => {
@@ -25,20 +25,19 @@ window.onload = function () {
                 city.disabled = false;
             } else {
                 city.innerHTML = '<option>No cities found</option>';
-                city.disabled = false;
+                city.disabled = true;
             }
-
-    })
-            .catch(error => {
+        })
+        .catch(error => {
             console.error("Error fetching cities:", error);
-            city.innerHTML = '<option>Error loading cities</option>'
+            city.innerHTML = '<option>Error loading cities</option>';
             city.disabled = true;
+        });
+    }
+
+    country.addEventListener('change', function () {
+        const selectedOpt = this.options[this.selectedIndex];
+        const countryN = selectedOpt.textContent;
+        if (countryN) updateCityOptions(countryN);
     });
 }
-country.addEventListener('change', function () {
-    const selectedOpt = this.options[this.selectedIndex];
-    const countryN = selectedOpt.textContent;
-    if (countryN) {
-        updateCityOptions(countryN)
-    }
-})}
