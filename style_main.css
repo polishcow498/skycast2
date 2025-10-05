@@ -1,0 +1,11 @@
+body {
+    font-family: Arial, sans-serif; text-align: center; background: #f9f9f9; padding: 50px;
+}
+.container {
+    display: inline-block; padding: 30px; background: white; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+a.button {
+    display: inline-block; padding: 15px 25px; margin-top: 20px; background: #ff424d; color: white; text-decoration: none; font-weight: bold; border-radius: 5px;
+}
+a.button:hover {
+    background: #e0353f; }
